@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server",
-    "build": "babel utils --out-dir lib"
+    "build": "babel src --out-dir dist",
+    "start": "npm run build && node test.js"
   },
   "repository": {
     "type": "git",
@@ -21,11 +21,6 @@
   "devDependencies": {
     "@babel/cli": "^7.7.4",
     "@babel/core": "^7.7.4",
-    "@babel/preset-env": "^7.7.4",
-    "clean-webpack-plugin": "^3.0.0",
-    "html-webpack-plugin": "^3.2.0",
-    "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.10",
-    "webpack-dev-server": "^3.9.0"
+    "@babel/preset-env": "^7.7.4"
   }
 }
