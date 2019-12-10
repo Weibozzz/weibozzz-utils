@@ -1,6 +1,5 @@
 ## 未完成编写
 - dom.js
-- storage.js
 - manipulate.js
 ## weibozzz
 个人常用工具库
@@ -108,3 +107,27 @@ import throttle from 'weibozzz/dist/utils/throttle'
 - `key` <String> 要获取的key
 - `isDecode` <Boolean> 是否需要解码
 
+### storage
+> 本地存储的封装
+
+#### 1.setStorage
+带有过期时间和使用限制的本地存储
+
+**setStorage (key, value, rest = {}**
+
+`@returns {{__count: number, value: *, __expired: number}}`
+
+- key {String} 存值的 key
+- value {Any}  存值的 value
+- rest {Object:{__count: 100,__expired:1}} 
+  额外参数，默认存储1天，使用100次,不会自动删除，只是在取值的时候有所扩展
+
+#### 2.getStorage
+取值 如果过期或者使用100次后取值为空
+
+`@returns {null|value}`
+
+**getStorage (key, isLimit = false)**
+
+- key {String} 取值key
+- isLimit {Boolean} 是否限制过期和使用次数
