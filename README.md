@@ -1,7 +1,6 @@
 ## 未完成编写
 - dom.js
 - storage.js
-- url.js
 - manipulate.js
 ## weibozzz
 个人常用工具库
@@ -73,3 +72,39 @@ import throttle from 'weibozzz/dist/utils/throttle'
 
 - `fn` <Function> 要被节流的函数
 - `period` <Number> 被节流的时间段默认200ms，单位`ms`
+
+### url
+
+#### 1.parse
+
+解析url字符串为对象
+
+**parse (href =  window.location.href, isDecode = false)**
+
+`@returns {object} 解析url字符串的对象`
+
+- `href` <String> url字符串
+- `isDecode` <Boolean> 是否需要解码 默认false
+
+#### 2.toUrl
+
+传入要转换的对象，返回url字符串
+
+**toUrl (urlObj)**
+
+`@returns {string} 转换后的url字符串`
+
+- `urlObj` <Object> url对象
+- 
+
+#### 3.getQueryString
+
+通过 key 获取 url 参数值
+
+**getQueryString (key, isDecode)**
+
+`@returns {string|null}`
+
+- `key` <String> 要获取的key
+- `isDecode` <Boolean> 是否需要解码
+
