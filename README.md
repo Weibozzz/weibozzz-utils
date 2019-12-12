@@ -1,6 +1,5 @@
 ## 未完成编写
 - dom.js
-- manipulate.js
 ## weibozzz
 个人常用工具库
 
@@ -131,3 +130,40 @@ import throttle from 'weibozzz/dist/utils/throttle'
 
 - key {String} 取值key
 - isLimit {Boolean} 是否限制过期和使用次数
+
+### compose
+整合函数，避免多次嵌套,详细了解看下方链接
+
+https://weibozzz.github.io/#/./docs/Redux/redux_v3.7.2%E6%BA%90%E7%A0%81%E8%AF%A6%E7%BB%86%E8%A7%A3%E8%AF%BB%E4%B8%8E%E5%AD%A6%E4%B9%A0%E4%B9%8Bcompose
+
+`@returns {*|*|(function(...[*]): *)|(function(*): *)}`
+
+- funcs {Function} 多个函数作为参数
+
+### manipulate
+对象的安全操作
+#### getIn
+安全取值函数
+
+`@returns {*} 返回操作后的值`
+
+- target {Object|Array} 取值目标对象
+- arr {Array} 取值的数组
+- defaultValue {*} 如果取不到的默认值
+
+#### setIn
+安全设置一个对象
+
+`@returns {*} 返回操作后的值`
+
+- target {Object|Array} 设置的目标对象
+- arr {Array} 设置以数组表示
+- value {*} 设置的值
+
+#### deleteIn
+安全删除对象的key
+
+`@returns {*} 返回操作后的值`
+
+- target {Object|Array} 删除的目标对象
+- arr {Array} 删除以数组表示

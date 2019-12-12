@@ -1,82 +1,83 @@
-'use strict'
-Object.defineProperty(exports, '__esModule', { value: true })
-var _assign = require('babel-runtime/core-js/object/assign')
-var _assign2 = _interopRequireDefault(_assign)
-exports.getIn = getIn
-exports.setIn = setIn
-exports.deleteIn = deleteIn
-exports.compose = compose
-var _is = require('./is')
-function _interopRequireDefault (obj) {
-  return obj && obj.__esModule ? obj : { default: obj }
-}
-function getIn (a, b, c) {
-  var d = (0, _assign2.default)({}, a)
-  for (var e = 0; e < b.length; e++) {
-    if (typeof d !== 'object' || d === null) {
-      return c
+/**
+ * 安全取值函数
+ * @param target {Object|Array} 取值目标对象
+ * @param arr {Array} 取值的数组
+ * @param defaultValue {*} 如果取不到的默认值
+ * @returns {*} 返回操作后的值
+ */
+function getIn (target, arr, defaultValue) {
+  for (var e = 0; e < arr.length; e++) {
+    if (typeof target !== 'object' || target === null) {
+      return defaultValue
     }
-    var f = b[e]
-    d = d[f]
+    var f = arr[e]
+    target = target[f]
   }
-  if (d === undefined) {
-    return c
+  if (target === undefined) {
+    return defaultValue
   }
-  return d
+  return target
 }
-function setIn (a, b, c) {
-  var d = function setRecursively (a, b, c, e) {
+/**
+ * 安全设置一个对象
+ * @param target {Object|Array} 设置的目标对象
+ * @param arr {Array} 设置以数组表示
+ * @param value {*} 设置的值
+ * @returns {*} 返回操作后的值
+ */
+function setIn (target, arr, value) {
+  var d = function setRecursively (target, arr, value, e) {
     var f = {},
-      g = b[e],
-      h = void 0
-    if (b.length > e) {
-      if (Array.isArray(a)) {
-        f = a.slice(0)
+      g = arr[e],
+      h
+    if (arr.length > e) {
+      if (Array.isArray(target)) {
+        f = target.slice(0)
       } else {
-        f = (0, _assign2.default)({}, a)
+        f = {...target}
       }
-      h = a[g] !== undefined ? a[g] : {}
-      f[g] = d(h, b, c, e + 1)
+      h = target[g] !== undefined ? target[g] : {}
+      f[g] = d(h, arr, value, e + 1)
       return f
     }
-    return c
+    return value
   }
-  return d(a, b, c, 0)
+  return d(target, arr, value, 0)
 }
-function deleteIn (a, b) {
-  var c = function deleteRecursively (a, b, d) {
+/**
+ * 安全删除对象的key
+ * @param target {Object|Array} 删除的目标对象
+ * @param arr {Array} 删除以数组表示
+ * @returns {*} 返回操作后的值
+ */
+function deleteIn (target, arr) {
+  var c = function deleteRecursively (target, arr, d) {
     var e = {},
-      f = b[d]
-    if (typeof a !== 'object' || a[f] === undefined) {
-      return a
+      f = arr[d]
+    if (typeof target !== 'object' || target[f] === undefined) {
+      return target
     }
-    if (b.length - 1 !== d) {
-      if (Array.isArray(a)) {
-        e = a.slice()
+    if (arr.length - 1 !== d) {
+      if (Array.isArray(target)) {
+        e = target.slice()
       } else {
-        e = (0, _assign2.default)({}, a)
+        e = {...target}
       }
-      e[f] = c(a[f], b, d + 1)
+      e[f] = c(target[f], arr, d + 1)
       return e
     }
-    if (Array.isArray(a)) {
-      e = [].concat(a.slice(0, f), a.slice(f + 1))
+    if (Array.isArray(target)) {
+      e = [].concat(target.slice(0, f), target.slice(f + 1))
     } else {
-      e = (0, _assign2.default)({}, a)
+      e = {...target}
       delete e[f]
     }
     return e
   }
-  return c(a, b, 0)
+  return c(target, arr, 0)
 }
-function compose (a) {
-  a.reduce(function (a, b) {
-    if ((0, _is.isFunc)(b)) {
-      return b(a)
-    }
-    if ((0, _is.isArray)(b) && (0, _is.isFunc)(b[0])) {
-      return b[0].apply(b, [a].concat(b.slice(1)))
-    }
-    return a
-  })
+module.exports = {
+  getIn: getIn,
+  setIn: setIn,
+  deleteIn: deleteIn
 }
