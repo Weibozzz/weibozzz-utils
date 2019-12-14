@@ -1,5 +1,3 @@
-## 未完成编写
-- dom.js
 ## weibozzz
 个人常用工具库
 
@@ -167,3 +165,31 @@ https://weibozzz.github.io/#/./docs/Redux/redux_v3.7.2%E6%BA%90%E7%A0%81%E8%AF%A
 
 - target {Object|Array} 删除的目标对象
 - arr {Array} 删除以数组表示
+
+### dom
+
+#### hasClass
+dom元素是否有某个class
+
+`@returns {boolean}`
+
+- dom {HTMLElement} dom元素对象
+- className {String} class名称
+
+#### setAttribute
+设置或者移除dom元素属性
+
+`@returns {undefined}`
+
+- dom {HTMLElement} dom元素对象
+- attr {String} 属性
+- value {String} 属性值
+
+#### fixedBody
+设置页面body固定在顶部
+
+`@returns {undefined}`
+#### looseBody
+取消设置页面body固定在顶部
+
+`@returns {undefined}`
