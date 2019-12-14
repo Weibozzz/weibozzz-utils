@@ -12,7 +12,18 @@ var debounce = require('./debounce');
 
 var throttle = require('./throttle');
 
+var compose = require('./compose');
+
+var manipulate = require('./manipulate');
+
+var url = require('./url');
+
+var storage = require('./storage');
+
+var dom = require('./dom');
+
 module.exports = _objectSpread({}, is, {
   debounce: debounce,
-  throttle: throttle
-});
+  throttle: throttle,
+  compose: compose
+}, manipulate, {}, url, {}, storage, {}, dom);

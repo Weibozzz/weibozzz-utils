@@ -33,3 +33,10 @@ function looseBody () {
   document.body.scrollTop = document.documentElement.scrollTop = -parseInt(b)
   a.style.top = ''
 }
+
+module.exports = {
+  hasClass: hasClass,
+  setAttribute: setAttribute,
+  fixedBody: fixedBody,
+  looseBody: looseBody
+}

@@ -40,3 +40,8 @@ function setStorage (key, value, rest = {}) {
   localStorage.setItem(key, JSON.stringify(result))
   return result
 }
+
+module.exports = {
+  getStorage: getStorage,
+  setStorage: setStorage
+}

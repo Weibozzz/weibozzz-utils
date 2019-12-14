@@ -53,3 +53,9 @@ function getQueryString (key, isDecode) {
   }
   return null
 }
+
+module.exports = {
+  parse: parse,
+  toUrl: toUrl,
+  getQueryString: getQueryString
+}
