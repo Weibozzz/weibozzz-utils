@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Weibozzz/weibozzz.git"
+    "url": "git+https://github.com/Weibozzz/weibozzz-utils.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Weibozzz/weibozzz/issues"
+    "url": "https://github.com/Weibozzz/weibozzz-utils/issues"
   },
-  "homepage": "https://github.com/Weibozzz/weibozzz#readme",
+  "homepage": "https://github.com/Weibozzz/weibozzz-utils#readme",
   "devDependencies": {
     "@babel/cli": "^7.7.4",
     "@babel/core": "^7.7.4",
