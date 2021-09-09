@@ -35,6 +35,19 @@ function isIOS () {
 function isAndroid () {
   return /android/i.test(navigator.userAgent)
 }
+/**
+ * 如果是 ios 返回 ios 版本数组 例如：14.2.3返回[14,2,3]
+ * 移动端 ios 11以上(包含)如果引入 fastclick(300ms点击延迟) 会出现 textarea 首次进入多次点击不动的现象
+ * @returns {string[]}
+ */
+function iosVersionArr() {
+  if (!isIOS()) {
+    throw new Error('不是ios')
+  }
+  const ua = navigator.userAgent.toLowerCase()
+  return ua.match(/cpu iphone os (.*?) like mac os/)[1].split('_')
+}
+
 module.exports = {
   isArray: isArray,
   isObject: isObject,
@@ -45,5 +58,6 @@ module.exports = {
   canParseJson: canParseJson,
   isTelNum: isTelNum,
   isIOS: isIOS,
-  isAndroid: isAndroid
+  isAndroid: isAndroid,
+  iosVersionArr: iosVersionArr,
 }

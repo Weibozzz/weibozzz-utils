@@ -6,6 +6,8 @@ const manipulate = require('./manipulate')
 const url = require('./url')
 const storage = require('./storage')
 const dom = require('./dom')
+const date = require('./date')
+const others = require('./others')
 module.exports = {
   ...is,
   debounce,
@@ -14,5 +16,7 @@ module.exports = {
   ...manipulate,
   ...url,
   ...storage,
-  ...dom
+  ...dom,
+  ...date,
+  ...others,
 }

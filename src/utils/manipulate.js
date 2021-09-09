@@ -1,23 +1,34 @@
 /**
  * 安全取值函数
- * @param target {Object|Array} 取值目标对象
- * @param arr {Array} 取值的数组
+ var obj = { a: { b: { c: 2 } } }
+ console.log(getIn(obj, 'a.b.c')) // output: 2
+ console.log(getIn(obj, '.a.b.c')) // output: 2
+ console.log(getIn(obj, ['a', 'b', 'c'])) // output: 2
+ console.log(getIn(obj, ['a', 'b', 'c', 'd', 'e'], [])) // output: []
+ console.log(getIn({ a: [{ b: 1 }] }, 'a[0].b', 3)) // output: 1
+ * @param source {Object|Array} 取值目标对象
+ * @param path {Array|String} 取值的数组
  * @param defaultValue {*} 如果取不到的默认值
  * @returns {*} 返回操作后的值
  */
-function getIn (target, arr, defaultValue) {
-  for (var e = 0; e < arr.length; e++) {
-    if (typeof target !== 'object' || target === null) {
+function getIn (source, path, defaultValue) {
+  const paths = Array.isArray(path) ? path
+    : path.replace(/\[(\d+)\]/g, '.$1')
+      .split('.')
+      .filter(Boolean)
+  let result = source
+  for (const p of paths) {
+    result = Object(result)[p]
+    if (result == undefined) {
       return defaultValue
     }
-    var f = arr[e]
-    target = target[f]
   }
-  if (target === undefined) {
-    return defaultValue
-  }
-  return target
+  return result
 }
+module.exports = {
+  getIn: getIn,
+}
+
 /**
  * 安全设置一个对象
  * @param target {Object|Array} 设置的目标对象

@@ -145,10 +145,14 @@ https://weibozzz.github.io/#/./docs/Redux/redux_v3.7.2%E6%BA%90%E7%A0%81%E8%AF%A
 
 `@returns {*} 返回操作后的值`
 
-- target {Object|Array} 取值目标对象
-- arr {Array} 取值的数组
-- defaultValue {*} 如果取不到的默认值
-
+```js
+ var obj = { a: { b: { c: 2 } } }
+ console.log(getIn(obj, 'a.b.c')) // output: 2
+ console.log(getIn(obj, '.a.b.c')) // output: 2
+ console.log(getIn(obj, ['a', 'b', 'c'])) // output: 2
+ console.log(getIn(obj, ['a', 'b', 'c', 'd', 'e'], [])) // output: []
+ console.log(getIn({ a: [{ b: 1 }] }, 'a[0].b', 3)) // output: 1
+```
 #### setIn
 安全设置一个对象
 
