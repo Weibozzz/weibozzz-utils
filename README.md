@@ -104,6 +104,11 @@ import throttle from 'weibozzz/dist/utils/throttle'
 - `key` <String> 要获取的key
 - `isDecode` <Boolean> 是否需要解码
 
+#### 4.iosVersionArr
+`
+如果是 ios 返回 ios 版本数组 例如：14.2.3返回[14,2,3]
+
+移动端 ios 11以上(包含)如果引入 fastclick(300ms点击延迟) 会出现 textarea 首次进入多次点击不动的现象`
 ### storage
 > 本地存储的封装
 
@@ -197,3 +202,7 @@ dom元素是否有某个class
 取消设置页面body固定在顶部
 
 `@returns {undefined}`
+### date
+- getDateObj `返回当前时间年月日 { year, month, date, h, m, s }`
+### others
+- usefulObj`去除无用的obj 例如 {b:null,c:undefined} 变为 {}`
