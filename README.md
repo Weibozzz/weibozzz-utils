@@ -206,3 +206,4 @@ dom元素是否有某个class
 - getDateObj `返回当前时间年月日 { year, month, date, h, m, s }`
 ### others
 - usefulObj`去除无用的obj 例如 {b:null,c:undefined} 变为 {}`
+- downLoadBlob`下载 blob 对象`
