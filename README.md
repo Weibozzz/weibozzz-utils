@@ -1,10 +1,6 @@
 ## weibozzz
 个人常用工具库
 
-```bash
-npm install weibozzz  -S
-```
-支持 `require import` 导入
 ## utils
 工具库
 ### is
@@ -23,21 +19,12 @@ module.exports = {
 }
 
 ```
-#### usage
-
-```js
-import * as is from 'weibozzz/dist/utils/is'
-```
 
 ### debounce 应用场景
 - 每次 `resize/scroll` 触发统计事件
 - 文本输入的验证（连续输入文字后发送 AJAX 请求进行验证，验证一次就好）
 
 #### usage
-
-```js
-import debounce from 'weibozzz/dist/utils/debounce'
-```
 
 **debounce(fn, wait = 800, now = true)**
 
@@ -58,9 +45,6 @@ import debounce from 'weibozzz/dist/utils/debounce'
 
 #### usage
 
-```js
-import throttle from 'weibozzz/dist/utils/throttle'
-```
 
 **throttle(fn, wait = 800, now = true)**
 
