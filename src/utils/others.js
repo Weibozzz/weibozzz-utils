@@ -16,11 +16,12 @@ function usefulObj (value = {}) {
 /**
  * 下载 blob 对象
  * 注意：处理 blob 请求头 responseType: "blob"
+ * type https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Basics_of_HTTP/MIME_types
  * @param res 需要为请求的原始数据，包括 headers
- * @param options 可为空 https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Basics_of_HTTP/MIME_types
  */
-function downLoadBlob(res, options) {
-  const params = options ? [[res.data], options] : [[res.data]];
+function downLoadBlob(res) {
+  const { data, type } = res || {}
+  const params = type ? [[data], { type }] : [[res.data]];
   const blob = new Blob(...params);
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
