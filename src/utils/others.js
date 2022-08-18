@@ -31,8 +31,34 @@ function downLoadBlob(res) {
   a.download = decodeURI(fileName);
   a.click();
 }
+/**
+ * 分批执行函数，防止dom更新过慢
+ * @param num 总条数
+ * @param patch 每一批的数量
+ * @param timer 间隔时间
+ * @param callBack 每一次执行回调
+ * @returns {Promise<void>}
+ */
+export async function patchCallBack (num, patch, timer = 100, callBack = () => {}) {
+  if (patch === 0) return
+  const count = Math.ceil(num / patch)
+  let i = -1
+  const fn = () => {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        i++
+        callBack(i, patch)
+        resolve()
+      }, timer)
+    })
+  }
+  for (let i = 0; i < count; i++) {
+    await fn()
+  }
+}
 
 module.exports = {
+  patchCallBack: patchCallBack,
   usefulObj: usefulObj,
   downLoadBlob: downLoadBlob,
 }
