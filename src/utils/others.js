@@ -21,15 +21,40 @@ function usefulObj (value = {}) {
  */
 function downLoadBlob(res) {
   const { data, type } = res || {}
-  const params = type ? [[data], { type }] : [[res.data]];
-  const blob = new Blob(...params);
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  const fileName = res.headers["content-disposition"]
-    .match(/filename=(.*)/)[1].replace(/"|'/g, "");
-  a.href = url;
-  a.download = decodeURI(fileName);
-  a.click();
+  try {
+    const params = type ? [[data], { type }] : [[res.data]];
+    const blob = new Blob(...params);
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    const fileName = getXHRFileName(res.headers["content-disposition"])
+    a.href = url;
+    a.download = decodeURI(fileName);
+    a.click();
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+function getXHRFileName(disposition){
+  const utf8FilenameRegex = /filename\*=UTF-8''([\w%\-\.]+)(?:; ?|$)/i;
+  const asciiFilenameRegex = /^filename=(["']?)(.*?[^\\])\1(?:; ?|$)/i;
+
+  let fileName = null;
+  if (utf8FilenameRegex.test(disposition)) {
+    fileName = decodeURIComponent(utf8FilenameRegex.exec(disposition)[1]);
+  } else {
+    // prevent ReDos attacks by anchoring the ascii regex to string start and
+    //  slicing off everything before 'filename='
+    const filenameStart = disposition.toLowerCase().indexOf('filename=');
+    if (filenameStart >= 0) {
+      const partialDisposition = disposition.slice(filenameStart);
+      const matches = asciiFilenameRegex.exec(partialDisposition );
+      if (matches != null && matches[2]) {
+        fileName = matches[2];
+      }
+    }
+  }
+  return fileName;
 }
 /**
  * 分批执行函数，防止dom更新过慢
