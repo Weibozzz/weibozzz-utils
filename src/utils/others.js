@@ -19,7 +19,13 @@ function usefulObj (value = {}) {
  * type https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Basics_of_HTTP/MIME_types
  * @param res 需要为请求的原始数据，包括 headers
  */
-function downLoadBlob(res) {
+async function downLoadBlob(res) {
+  try {
+    // serve error
+    const { msg } = JSON.parse(await res.data.text())
+    return;
+  } catch (error) {
+  }
   const { data, type } = res || {}
   try {
     const params = type ? [[data], { type }] : [[res.data]];
